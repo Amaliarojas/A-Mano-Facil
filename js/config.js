@@ -10,5 +10,5 @@ const CONFIG = {
   formspreeId: "",
 
   
-  admin: { usuario: "admin", clave: "admin123" },
+  admin: { usuario: "Amalia", clave: "Amalia123" },
 };
