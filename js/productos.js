@@ -1,0 +1,37 @@
+/* Productos publicados (los que ven todos los visitantes).
+   Para actualizarlos: en el panel admin pulsa "Descargar productos.js",
+   reemplaza este archivo con el descargado y haz commit + push.
+
+   Fotografías: en cada producto, "imagenes" es una lista de rutas o URLs,
+   por ejemplo: ["img/productos/manilla-olas-1.jpg", "img/productos/manilla-olas-2.jpg"].
+   Si la lista está vacía se muestra una imagen provisional. */
+const DEFAULT_PRODUCTS = [
+  { id: 1, nombre: "Manilla Olas", categoria: "Manillas", precio: 25000, imagenes: [],
+    descripcion: "Manilla tejida a mano con hilo encerado y cuentas azules. Ajustable.",
+    detalles: "Material: hilo encerado y cuentas de vidrio. Talla ajustable. Tiempo de elaboración: 2 días.",
+    tags: ["playa", "regalo", "unisex", "economico"] },
+  { id: 2, nombre: "Manilla Sol", categoria: "Manillas", precio: 28000, imagenes: [],
+    descripcion: "Diseño en tonos cálidos inspirado en los atardeceres del Caribe.",
+    detalles: "Material: hilo encerado y dijes dorados. Talla ajustable.",
+    tags: ["playa", "regalo", "mujer", "economico"] },
+  { id: 3, nombre: "Collar Concha", categoria: "Collares", precio: 45000, imagenes: [],
+    descripcion: "Collar con concha natural y cadena hipoalergénica.",
+    detalles: "Material: concha natural, acero inoxidable. Largo: 45 cm.",
+    tags: ["playa", "mujer", "regalo", "cumpleanos"] },
+  { id: 4, nombre: "Collar Marea", categoria: "Collares", precio: 52000, imagenes: [],
+    descripcion: "Collar de perlas de río con cierre dorado. Elegante y liviano.",
+    detalles: "Material: perlas de río y baño de oro. Largo: 42 cm.",
+    tags: ["elegante", "mujer", "regalo", "cumpleanos", "aniversario"] },
+  { id: 5, nombre: "Bolso Palma", categoria: "Bolsos", precio: 95000, imagenes: [],
+    descripcion: "Bolso tejido en fibra natural, amplio y resistente.",
+    detalles: "Material: fibra natural. Medidas: 30x25 cm. Forro interno en tela.",
+    tags: ["playa", "mujer", "diario", "regalo"] },
+  { id: 6, nombre: "Mini Bolso Coral", categoria: "Bolsos", precio: 70000, imagenes: [],
+    descripcion: "Mini bolso para salir: cabe celular, llaves y billetera.",
+    detalles: "Material: macramé y cierre de cremallera. Medidas: 18x14 cm.",
+    tags: ["salir", "mujer", "regalo", "cumpleanos"] },
+  { id: 7, nombre: "Set Pareja", categoria: "Sets", precio: 48000, imagenes: [],
+    descripcion: "Dos manillas a juego, perfectas para regalar en pareja o con amigos.",
+    detalles: "Incluye 2 manillas ajustables y una cajita de regalo.",
+    tags: ["pareja", "regalo", "aniversario", "san valentin"] },
+];
