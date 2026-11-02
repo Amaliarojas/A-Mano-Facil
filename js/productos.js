@@ -1,6 +1,6 @@
 
 const DEFAULT_PRODUCTS = [
-  { id: 1, nombre: "Manilla Olas", categoria: "Manillas", precio: 25000, imagenes: [],
+  { id: 1, nombre: "Manilla Olas", categoria: "Salud y Bienestar", precio: 25000, imagenes: [],
     descripcion: "Manilla tejida a mano con hilo encerado y cuentas azules. Ajustable.",
     detalles: "Material: hilo encerado y cuentas de vidrio. Talla ajustable. Tiempo de elaboración: 2 días.",
     tags: ["playa", "regalo", "unisex", "economico"] },
