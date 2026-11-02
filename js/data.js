@@ -1,9 +1,4 @@
-/* ============================================================
-   ALMACENAMIENTO Y UTILIDADES COMPARTIDAS
-   - Visitantes: ven los productos de js/productos.js (publicados).
-   - Admin: sus cambios se guardan en localStorage de SU navegador
-     y se publican descargando productos.js desde el panel.
-   ============================================================ */
+
 const Store = {
   K_PROD: "catalogo_productos",
   K_MSG: "catalogo_mensajes",

@@ -1,10 +1,4 @@
-/* Productos publicados (los que ven todos los visitantes).
-   Para actualizarlos: en el panel admin pulsa "Descargar productos.js",
-   reemplaza este archivo con el descargado y haz commit + push.
 
-   Fotografías: en cada producto, "imagenes" es una lista de rutas o URLs,
-   por ejemplo: ["img/productos/manilla-olas-1.jpg", "img/productos/manilla-olas-2.jpg"].
-   Si la lista está vacía se muestra una imagen provisional. */
 const DEFAULT_PRODUCTS = [
   { id: 1, nombre: "Manilla Olas", categoria: "Manillas", precio: 25000, imagenes: [],
     descripcion: "Manilla tejida a mano con hilo encerado y cuentas azules. Ajustable.",

@@ -1,13 +1,4 @@
-/* ============================================================
-   ASISTENTE RECOMENDADOR (IA aplicada)
-   Entiende el mensaje (presupuesto, categoría, ocasión y preguntas
-   frecuentes) y recomienda productos REALES del catálogo.
-   Funciona en el navegador, sin exponer ninguna API key.
 
-   Para usar un modelo de lenguaje real (Claude u otro), llámalo desde
-   un backend propio (Node/Express o función serverless) y adapta
-   Asistente.responder(): así la clave nunca se publica en GitHub.
-   ============================================================ */
 const Asistente = (function () {
   const norm = (s) => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 

@@ -1,7 +1,4 @@
-/* ============================================================
-   PÁGINA PÚBLICA: catálogo, vista de producto con galería,
-   contacto y asistente.
-   ============================================================ */
+
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
