@@ -1,31 +1,57 @@
 
 const DEFAULT_PRODUCTS = [
-  { id: 1, nombre: "Manilla de Olas", categoria: "Salud y Bienestar", precio: 25000, imagenes: [],
-    descripcion: "Manilla tejida a mano con hilo encerado y cuentas azules. Ajustable.",
-    detalles: "Material: hilo encerado y cuentas de vidrio. Talla ajustable. Tiempo de elaboración: 2 días.",
-    tags: ["playa", "regalo", "unisex", "economico"] },
-  { id: 2, nombre: "Manilla Sol", categoria: "Manillas", precio: 28000, imagenes: [],
-    descripcion: "Diseño en tonos cálidos inspirado en los atardeceres del Caribe.",
-    detalles: "Material: hilo encerado y dijes dorados. Talla ajustable.",
-    tags: ["playa", "regalo", "mujer", "economico"] },
-  { id: 3, nombre: "Collar Concha", categoria: "Collares", precio: 45000, imagenes: [],
-    descripcion: "Collar con concha natural y cadena hipoalergénica.",
-    detalles: "Material: concha natural, acero inoxidable. Largo: 45 cm.",
-    tags: ["playa", "mujer", "regalo", "cumpleanos"] },
-  { id: 4, nombre: "Collar Marea", categoria: "Collares", precio: 52000, imagenes: [],
-    descripcion: "Collar de perlas de río con cierre dorado. Elegante y liviano.",
-    detalles: "Material: perlas de río y baño de oro. Largo: 42 cm.",
-    tags: ["elegante", "mujer", "regalo", "cumpleanos", "aniversario"] },
-  { id: 5, nombre: "Bolso Palma", categoria: "Bolsos", precio: 95000, imagenes: [],
-    descripcion: "Bolso tejido en fibra natural, amplio y resistente.",
-    detalles: "Material: fibra natural. Medidas: 30x25 cm. Forro interno en tela.",
-    tags: ["playa", "mujer", "diario", "regalo"] },
-  { id: 6, nombre: "Mini Bolso Coral", categoria: "Bolsos", precio: 70000, imagenes: [],
-    descripcion: "Mini bolso para salir: cabe celular, llaves y billetera.",
-    detalles: "Material: macramé y cierre de cremallera. Medidas: 18x14 cm.",
-    tags: ["salir", "mujer", "regalo", "cumpleanos"] },
-  { id: 7, nombre: "Set Pareja", categoria: "Sets", precio: 48000, imagenes: [],
-    descripcion: "Dos manillas a juego, perfectas para regalar en pareja o con amigos.",
-    detalles: "Incluye 2 manillas ajustables y una cajita de regalo.",
-    tags: ["pareja", "regalo", "aniversario", "san valentin"] },
+  {
+    id: 1, nombre: "ColiPlus",
+     categoria: "Salud y Bienestar",
+     precio: 75900,
+     imagenes: ["img/productos/coli.png"],
+    descripcion: "Formula de fibra vegetal para mejorar la digestión y el tránsito intestinal.",
+    detalles: "Consumir 1 cápsula al día con abundante agua. No exceder la dosis recomendada.",
+    tags: ["digestión", "fibra", "bienestar", "natural"]
+  },
+  {
+    id: 2, nombre: "RtaFull", 
+    categoria: "Salud y Bienestar", 
+    precio: 79900, 
+    imagenes: ["img/productos/rtafull.png"],
+    descripcion: "Un concentrado natural para acompañar tu bienestar digestivo y tu rutina diaria.",
+    detalles: "Disolver una copa en 240ml de agua o jugo de frutas.",
+    tags: ["digestión", "bienestar", "natural", "rutina"]
+  },
+  {
+    id: 3, nombre: "Maxlite-Colageno",
+     categoria: "Salud y Bienestar",
+   precio: 89900,
+    imagenes: ["img/productos/Colageno.png"],
+    descripcion: "Colageno con vitamina b12 y ácido hialurónico, ideal para la piel y las articulaciones.",
+    detalles: "Mezcle 1 cucharada en 200ml de agua.",
+    tags: ["piel", "articulaciones", "belleza", "bienestar"]
+  },
+  {
+    id: 4, nombre: "100% Creatine",
+     categoria: "Suplementos", precio: 99900, 
+     imagenes: ["img/productos/creatine.png"],
+    descripcion: "Suplemento deportivo para mejorar el rendimiento y la recuperación.",
+    detalles: "Consumir 1 cucharada al día con agua. No exceder la dosis recomendada.",
+    tags: ["deportes", "suplementos", "masculino", "economico"]
+  },
+  {
+    id: 5, nombre: "Vinagre de Manzana",
+     categoria: "Salud y Bienestar",
+     precio: 69900,
+     imagenes: ["img/productos/vinagre-manzana.jpg"],
+    descripcion: "Vinagre de manzana natural, ideal para mejorar la digestión y el metabolismo.",
+    detalles: "Tomar 3 capsulas blandas al dia.",
+    tags: ["digestión", "metabolismo", "natural", "bienestar"]
+  },  
+  {
+    id: 6, nombre: "Revisfactor",
+     categoria: "Suplementos",
+     precio: 89900,
+     imagenes: ["/img/productos/Resvisfactor.png"],
+    descripcion: "Una formula nutricional en polvo para acompañar tu bienestar desde adentro.",
+    detalles: "Tomar 1 cucharada al día con 200ml de agua.",
+    tags: ["saludud","natural","suplemento"]
+  },
+
 ];

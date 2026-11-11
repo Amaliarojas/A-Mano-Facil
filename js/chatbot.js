@@ -5,23 +5,41 @@ const Asistente = (function () {
   const FAQ = [
     { k: ["envio", "enviar", "domicilio", "despacho", "entrega", "llega"],
       r: "Hacemos envíos a todo el país. Normalmente tardan de 2 a 5 días hábiles según la ciudad." },
-    { k: ["pago", "pagar", "transferencia", "nequi", "efectivo", "tarjeta"],
+    
+      { k: ["pago", "pagar", "transferencia", "nequi", "efectivo", "tarjeta"],
       r: "Puedes pagar por transferencia o Nequi. Coordinamos el pago por WhatsApp o por el formulario de contacto." },
-    { k: ["horario", "hora", "atienden", "abierto"],
+    
+      { k: ["horario", "hora", "atienden", "abierto"],
       r: "Atendemos de lunes a sábado, de 8:00 a. m. a 6:00 p. m. Fuera de horario respondemos al día siguiente." },
-    { k: ["contacto", "whatsapp", "telefono", "correo", "email"],
+    
+      { k: ["contacto", "whatsapp", "telefono", "correo", "email"],
       r: `Escríbenos por WhatsApp o usa el formulario de contacto de esta página. También por correo: ${CONFIG.email}` },
-    { k: ["material", "hipoalergenico", "alergia", "dura", "duran"],
-      r: "Usamos fibras naturales, concha, perlas de río y acero inoxidable hipoalergénico. Con buen cuidado duran años." },
-    { k: ["personalizado", "personalizar", "a medida", "encargo", "pedido especial"],
-      r: "Sí, aceptamos pedidos personalizados. Cuéntanos tu idea en el formulario de contacto." },
-  ];
+    
+      { k: ["ingredientes", "ingrediente", "composicion", "componente", "contiene"],
+      r: "Puedes consultar la descripción y los detalles de cada producto en nuestro catálogo para conocer su composición e información disponible." },
+    ];
 
-  const CATEGORIAS = { manilla: "Manillas", pulsera: "Manillas", collar: "Collares", cadena: "Collares", bolso: "Bolsos", cartera: "Bolsos", set: "Sets", combo: "Sets" };
-  const OCASIONES = {
-    regalo: ["regalo"], cumple: ["cumpleanos"], aniversario: ["aniversario"], pareja: ["pareja"], novia: ["pareja", "mujer"],
-    novio: ["pareja", "unisex"], mama: ["mujer", "regalo"], amiga: ["mujer", "regalo"], playa: ["playa"], elegante: ["elegante"],
-    salir: ["salir"], diario: ["diario"], economico: ["economico"], barato: ["economico"],
+    const CATEGORIAS= { 
+      salud: "Salud y Bienestar",
+      bienestar: "Salud y Bienestar",
+      suplemento: "Suplementos",
+      suplementos: "Suplementos"
+   };
+  
+   const OCASIONES = {
+      digestion: ["digestión", "fibra"],
+      fibra: ["fibra", "digestión"],
+      metabolismo: ["metabolismo"],
+      piel: ["piel", "belleza"],
+      belleza: ["belleza", "piel"],
+      articulaciones: ["articulaciones"],
+      deportes: ["deportes"],
+      ejercicio: ["deportes"],
+      vitaminas: ["vitaminas"],
+      magnesio: ["magnesio", "minerales"],
+      bienestar: ["bienestar"],
+      natural: ["natural"]
+       
   };
 
   function presupuesto(t) {
@@ -67,7 +85,7 @@ const Asistente = (function () {
   function responder(mensaje, productos) {
     const t = norm(mensaje);
     if (/^(hola|buenas|hey|buenos dias|buenas tardes|buenas noches)\b/.test(t))
-      return { texto: "Hola. Cuéntame qué buscas (tipo de producto, ocasión o presupuesto) y te ayudo a elegir." };
+      return { texto: "Hola. Cuéntame qué buscas (tipo de producto, necesidad o presupuesto) y te ayudo a elegir." };
     if (/gracias|chao|adios/.test(t)) return { texto: "Con gusto. Si necesitas algo más, aquí estoy." };
 
     const faq = FAQ.find((f) => f.k.some((k) => t.includes(k)));
@@ -79,7 +97,7 @@ const Asistente = (function () {
     const rec = recomendar(t, productos);
     if (rec) return rec;
 
-    return { texto: "No estoy seguro de haber entendido. Prueba con: “un regalo hasta 50 mil”, “collares”, “algo para la playa”, o pregúntame por envíos y pagos." };
+    return { texto: "No estoy seguro de haber entendido. Prueba con: “algo para la digestión”, “un suplemento”, “algo para la piel” o “productos hasta 80 mil”. También puedes preguntarme por envíos y pagos." };
   }
 
   return { responder };
