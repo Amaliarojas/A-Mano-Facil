@@ -8,6 +8,8 @@
   let galIr = null; // función de la galería abierta
   const buscar = (id) => productos.find((p) => String(p.id) === String(id));
 
+
+
   /* ---------- Marca ---------- */
   function aplicarMarca() {
     document.title = `${CONFIG.marca} | Catálogo`;
@@ -32,6 +34,7 @@
     fallbackImgs(art);
   }
 
+
   /* ---------- Menú móvil ---------- */
   $("#menuBtn").addEventListener("click", (e) => {
     const abierto = $("#menu").classList.toggle("open");
@@ -49,6 +52,8 @@
       })
     );
   }
+
+
 
   /* ---------- Catálogo ---------- */
   function cardHTML(p) {
@@ -122,6 +127,8 @@
     $("#rangoVal").textContent = `Hasta ${formatCOP(v)}`;
     renderProductos();
   });
+
+
 
   /* ---------- Vista de producto con galería ---------- */
   function abrirDetalle(id) {
@@ -225,6 +232,8 @@
     $("#contacto").scrollIntoView({ behavior: "smooth" });
   }
 
+
+
   /* ---------- Formulario de contacto ---------- */
   function aviso(msg, tipo) { const a = $("#aviso"); a.className = "aviso " + tipo; a.textContent = msg; }
 
@@ -253,6 +262,7 @@
     } finally { btn.disabled = false; }
   });
 
+
   /* ---------- Animación de entrada ---------- */
   let io;
   function observarReveal() {
@@ -260,6 +270,7 @@
     io = io || new IntersectionObserver((es) => es.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } }), { threshold: 0.1 });
     $$(".reveal:not(.visible)").forEach((el) => io.observe(el));
   }
+
 
   /* ---------- Asistente ---------- */
   let chatIniciado = false;
@@ -275,7 +286,7 @@
     };
     add(`Hola, soy el asistente de ${escapeHTML(CONFIG.marca)}. Dime qué buscas, para quién es o tu presupuesto, y te recomiendo piezas.`, "bot");
 
-    const quick = ["Un regalo para mi pareja", "Algo hasta 50 mil", "Ideas para playa", "¿Hacen envíos?"];
+    const quick = ["Un suplemento para mí", "Horario de atención", "Algo para la digestión", "¿Hacen envíos?"];
     $("#chatQuick").innerHTML = quick.map((q) => `<button type="button">${q}</button>`).join("");
     $$("#chatQuick button").forEach((b) => b.addEventListener("click", () => enviar(b.textContent)));
 
