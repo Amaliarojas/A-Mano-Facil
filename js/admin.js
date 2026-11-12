@@ -5,29 +5,91 @@
   const MAX_FOTOS = 6;
   let fotos = []; // imágenes del producto que se está editando
 
-  const logueado = () => sessionStorage.getItem(Store.K_SESSION) === "1";
 
-  function mostrar() {
-    const ok = logueado();
+  async function mostrar() {
+    let ok = false;
+
+    try {
+      const respuesta = await fetch("http://localhost:3000/api/admin/sesion", {
+        credentials: "include"
+      });
+
+      if (!respuesta.ok) {
+        throw new Error("No se pudo verificar la sesión");
+      }
+
+      const estado = await respuesta.json();
+      ok = estado.autenticado;
+
+    } catch (error) {
+      console.error(error);
+      $("#loginAviso").className = "aviso err";
+      $("#loginAviso").textContent = "No se pudo conectar con el servidor.";
+    }
+
     $("#loginView").style.display = ok ? "none" : "block";
     $("#panelView").style.display = ok ? "block" : "none";
     $("#btnSalir").style.display = ok ? "inline-block" : "none";
-    if (ok) { renderProductos(); renderMensajes(); renderFotos(); }
+
+    if (ok) {
+      renderProductos();
+      renderMensajes();
+      renderFotos();
+    }
   }
 
-  $("#loginForm").addEventListener("submit", (e) => {
+  // Iniciar sesión
+  $("#loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const a = $("#loginAviso");
-    if ($("#usr").value === CONFIG.admin.usuario && $("#pwd").value === CONFIG.admin.clave) {
-      sessionStorage.setItem(Store.K_SESSION, "1");
-      a.className = "aviso";
-      mostrar();
-    } else {
+    a.className = "aviso";
+    a.textContent = "Verificando acceso...";
+
+    try {
+      const respuesta = await fetch("http://localhost:3000/api/admin/login", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          usuario: $("#usr").value,
+          clave: $("#pwd").value
+        })
+      });
+
+      const resultado = await respuesta.json();
+
+      if (!respuesta.ok) {
+        throw new Error(resultado.mensaje);
+      }
+
+      a.textContent = "";
+      await mostrar();
+
+    } catch (error) {
       a.className = "aviso err";
-      a.textContent = "Usuario o contraseña incorrectos.";
+      a.textContent = error.message || "No se pudo iniciar sesión.";
     }
   });
-  $("#btnSalir").addEventListener("click", () => { sessionStorage.removeItem(Store.K_SESSION); mostrar(); });
+
+  // Cerrar sesión
+  $("#btnSalir").addEventListener("click", async () => {
+    try {
+      await fetch("http://localhost:3000/api/admin/logout", {
+        method: "POST",
+        credentials: "include"
+      });
+
+      await mostrar();
+
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
+  });
+
+
 
   $$("[data-tab]").forEach((b) =>
     b.addEventListener("click", () => {
@@ -182,25 +244,54 @@
       ? `Archivo de ${kb} KB: es pesado. Para una página más rápida, guarda las fotos en la carpeta img/productos/ y usa rutas en lugar de subir archivos.`
       : `Descargado productos.js (${kb} KB). Reemplaza js/productos.js y súbelo a GitHub.`;
   });
-
+  
   /* ---------- Solicitudes ---------- */
-  function renderMensajes() {
-    const lista = Store.getMessages();
-    $("#cntMsg").textContent = lista.length ? `(${lista.length})` : "";
-    $("#listaMsg").innerHTML = lista.length
-      ? lista.map((m) => `<div class="msg-card">
-          <b>${escapeHTML(m.nombre)}</b> · <a href="mailto:${escapeHTML(m.email)}" style="border-bottom:1px solid var(--gold)">${escapeHTML(m.email)}</a><br>
-          <small>${escapeHTML(m.fecha)} · Producto: ${escapeHTML(m.producto || "General")}</small>
-          <p style="margin:.6rem 0">${escapeHTML(m.mensaje)}</p>
-          <button class="btn btn-sm btn-danger" data-delmsg="${m.id}">Eliminar</button></div>`).join("")
-      : `<p class="nota" style="margin-bottom:1rem">Aún no hay solicitudes.</p>`;
-    $$("[data-delmsg]").forEach((b) =>
-      b.addEventListener("click", () => { Store.saveMessages(Store.getMessages().filter((m) => String(m.id) !== b.dataset.delmsg)); renderMensajes(); })
-    );
-  }
-  $("#btnBorrarMsg").addEventListener("click", () => {
-    if (confirm("¿Borrar todas las solicitudes?")) { Store.saveMessages([]); renderMensajes(); }
-  });
+  async function renderMensajes() {
+    const contenedor = $("#listaMsg");
 
-  mostrar();
+    contenedor.innerHTML = `<p class="nota">Cargando solicitudes...</p>`;
+
+    try {
+      const respuesta = await fetch("http://localhost:3000/api/solicitudes", {
+    credentials: "include"
+     });
+
+      if (!respuesta.ok) {
+        throw new Error("No se pudieron consultar las solicitudes");
+      }
+
+      const lista = await respuesta.json();
+
+      $("#cntMsg").textContent = lista.length ? `(${lista.length})` : "";
+
+      contenedor.innerHTML = lista.length
+        ? lista.map((m) => `
+            <div class="msg-card">
+              <b>${escapeHTML(m.nombre)}</b> ·
+              <a href="mailto:${escapeHTML(m.email)}" style="border-bottom:1px solid var(--gold)">
+                ${escapeHTML(m.email)}
+              </a>
+              <br>
+              <small>
+                ${new Date(m.fecha).toLocaleString("es-CO")}
+                · Producto: ${escapeHTML(m.producto || "General")}
+              </small>
+              <p style="margin:.6rem 0">${escapeHTML(m.mensaje)}</p>
+            </div>
+          `).join("")
+        : `<p class="nota" style="margin-bottom:1rem">Aún no hay solicitudes.</p>`;
+
+    } catch (error) {
+      console.error("Error al cargar solicitudes:", error);
+
+      $("#cntMsg").textContent = "";
+
+      contenedor.innerHTML = `
+        <p class="nota">
+          No se pudieron cargar las solicitudes. Comprueba que el servidor esté funcionando.
+        </p>
+      `;
+    }
+  }
+
 })();

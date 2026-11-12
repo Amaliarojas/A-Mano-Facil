@@ -235,32 +235,58 @@
 
 
   /* ---------- Formulario de contacto ---------- */
-  function aviso(msg, tipo) { const a = $("#aviso"); a.className = "aviso " + tipo; a.textContent = msg; }
+  
+/* ---------- Formulario de contacto ---------- */
+function aviso(msg, tipo) {
+    const a = $("#aviso");
+    a.className = "aviso " + tipo;
+    a.textContent = msg;
+}
 
-  $("#formContacto").addEventListener("submit", async (e) => {
+$("#formContacto").addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const f = e.target;
-    const data = { nombre: f.nombre.value.trim(), email: f.email.value.trim(), producto: f.producto.value, mensaje: f.mensaje.value.trim() };
+
+    const data = {
+        nombre: f.nombre.value.trim(),
+        email: f.email.value.trim(),
+        producto: f.producto.value,
+        mensaje: f.mensaje.value.trim()
+    };
+
     if (data.nombre.length < 2) return aviso("Escribe tu nombre.", "err");
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) return aviso("Escribe un correo válido.", "err");
     if (data.mensaje.length < 5) return aviso("Cuéntanos un poco más en el mensaje.", "err");
 
     const btn = f.querySelector("button[type=submit]");
     btn.disabled = true;
-    Store.addMessage(data); // se registra siempre (lo ve el panel admin en este navegador)
+
     try {
-      if (CONFIG.formspreeId) {
-        const r = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
-          method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(data),
+        const respuesta = await fetch("http://localhost:3000/api/solicitudes", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         });
-        if (!r.ok) throw new Error("formspree");
-      }
-      aviso("Gracias. Recibimos tu solicitud y te responderemos pronto.", "ok");
-      f.reset();
-    } catch (err) {
-      aviso("Guardamos tu solicitud, pero no se pudo enviar el correo. Escríbenos por WhatsApp.", "err");
-    } finally { btn.disabled = false; }
-  });
+
+        if (!respuesta.ok) {
+            throw new Error("No se pudo guardar la solicitud");
+        }
+
+        aviso("Gracias. Recibimos tu solicitud y te responderemos pronto.", "ok");
+        f.reset();
+
+    } catch (error) {
+        console.error(error);
+        aviso("No pudimos enviar tu solicitud. Inténtalo nuevamente.", "err");
+
+    } finally {
+        btn.disabled = false;
+    }
+});
+
 
 
   /* ---------- Animación de entrada ---------- */
