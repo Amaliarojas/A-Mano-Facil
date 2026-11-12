@@ -1,0 +1,31 @@
+{
+  "name": "a-mano-facil",
+  "version": "1.0.0",
+  "description": "1. `js/config.js`: nombre, lema, descripción, WhatsApp, correo y credenciales del admin\r 2. `js/productos.js`: productos publicados.\r 3. `css/styles.css`: colores en las variables de `:root` (`--green`, `--gold`, `--paper`...).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saezarceandresantonio-coder/A-Mano-Facil.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/saezarceandresantonio-coder/A-Mano-Facil/issues"
+  },
+  "homepage": "https://github.com/saezarceandresantonio-coder/A-Mano-Facil#readme",
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "vite": "^8.3.8"
+  }
+}
