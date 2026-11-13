@@ -34,7 +34,8 @@ async function conectarDB() {
 app.use(cors({
     origin: [
         "http://localhost:5173",
-        "https://saezarceandresantonio-coder.github.io"
+        "https://saezarceandresantonio-coder.github.io",
+        "https://amaliarojas.github.io"
     ],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS"],
