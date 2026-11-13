@@ -2,8 +2,8 @@
 import { useEffect, useRef, useState } from "react";
 import { productosIniciales } from "../../data/productos.js";
 import { formatCOP, procesarImagen } from "../../utils/adminUtils.js";
+import { API } from "../../config/api.js";
 
-const API = "http://localhost:3000";
 const CLAVE_PRODUCTOS = "catalogo_productos";
 const MAX_FOTOS = 6;
 

@@ -73,10 +73,6 @@ function verificarAdmin(req, res, next) {
 // Iniciar sesión del administrador
 app.post("/api/admin/login", (req, res) => {
     const { usuario, clave } = req.body;
-console.log("Se recibió un intento de inicio de sesión");
-console.log("Usuario recibido:", usuario);
-console.log("¿ADMIN_USER existe?", Boolean(process.env.ADMIN_USER));
-console.log("¿ADMIN_PASSWORD existe?", Boolean(process.env.ADMIN_PASSWORD));
 
     if (
         usuario === process.env.ADMIN_USER &&

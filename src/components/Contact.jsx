@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { CONFIG } from "../data/config/tienda.js";
 import { productosIniciales } from "../data/productos.js";
+import { API } from "../config/api.js";
 
 function Contact() {
   const [datos, setDatos] = useState({
@@ -60,7 +61,7 @@ function Contact() {
 
     try {
       const respuesta = await fetch(
-        "http://localhost:3000/api/solicitudes",
+        `${API}/api/solicitudes`,
         {
           method: "POST",
           headers: {
