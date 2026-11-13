@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,100 +7,11 @@
   <title>Administración | Amanofacilito</title>
   <meta name="robots" content="noindex" />
   <link rel="icon" href="data:," />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-  <header class="nav">
-    <div class="wrap">
-      <a href="index.html" class="logo">← Volver a la tienda</a>
-      <button class="btn btn-sm btn-ghost" id="btnSalir" style="display:none">Cerrar sesión</button>
-    </div>
-  </header>
+  <div id="root"></div>
 
-  <main class="wrap admin-wrap">
-    <!-- Acceso -->
-    <section id="loginView">
-      <form class="login-box" id="loginForm">
-        <h2>Acceso administrador</h2>
-        <label>Usuario <input id="usr" type="text" autocomplete="username" required /></label>
-        <label>Contraseña <input id="pwd" type="password" autocomplete="current-password" required /></label>
-        <div><button class="btn" type="submit">Entrar</button></div>
-        <div class="aviso" id="loginAviso"></div>
-      </form>
-    </section>
-
-    <!-- Panel -->
-    <section id="panelView" style="display:none">
-      <h2 style="margin-bottom:1.2rem">Panel de gestión</h2>
-      <div class="tabs">
-        <button class="active" data-tab="prod">Productos</button>
-        <button data-tab="msg">Solicitudes <span id="cntMsg"></span></button>
-      </div>
-
-      <div id="tab-prod" class="panel-grid">
-        <form class="admin-form" id="formProd">
-          <h3 id="formTitulo">Nuevo producto</h3>
-          <input type="hidden" name="pid" />
-          <label>Nombre <input name="nombre" required maxlength="60" /></label>
-          <label>Categoría <input name="categoria" required maxlength="30" list="listaCats" placeholder="Bebidas, Prendas..." /></label>
-          <datalist id="listaCats"></datalist>
-          <label>Precio (COP) <input name="precio" type="number" min="0" step="500" required /></label>
-          <label>Descripción corta <textarea name="descripcion" required maxlength="160" style="min-height:70px"></textarea></label>
-          <label>Detalles (material, medidas) <textarea name="detalles" maxlength="300" style="min-height:70px"></textarea></label>
-          <label>Etiquetas (separadas por coma) <input name="tags" placeholder="regalo, Saludable, mujer" /></label>
-
-          <div>
-            <label>Fotografías de referencia <span class="nota" id="cuentaFotos"></span></label>
-            <div class="drop" id="drop" tabindex="0" role="button" aria-label="Subir fotografías">
-              <b>Haz clic o arrastra tus fotografías aquí</b><br>
-              <span class="nota">JPG, PNG o WebP. Se reducen automáticamente. La primera es la portada.</span>
-            </div>
-            <input type="file" id="fileInput" accept="image/*" multiple hidden />
-            <div class="previews" id="previews" style="margin-top:.8rem"></div>
-          </div>
-
-          <div class="fila-url">
-            <label style="flex:1">O agrega una ruta o URL <input id="urlFoto" placeholder="img/productos/manilla-1.jpg" /></label>
-            <button class="btn btn-sm btn-ghost" type="button" id="btnUrl">Agregar</button>
-          </div>
-
-          <div class="aviso" id="formAviso" role="status"></div>
-          <div style="display:flex;gap:.8rem;flex-wrap:wrap">
-            <button class="btn" type="submit">Guardar</button>
-            <button class="btn btn-ghost" type="button" id="btnCancelar" style="display:none">Cancelar edición</button>
-          </div>
-        </form>
-
-        <div>
-          <div class="scroll-x">
-            <table class="tabla">
-              <thead><tr><th></th><th>Producto</th><th>Precio</th><th></th></tr></thead>
-              <tbody id="tbody"></tbody>
-            </table>
-          </div>
-          <div class="pie-tabla">
-            <button class="btn btn-sm" id="btnExport">Descargar productos.js</button>
-            <button class="btn btn-sm btn-danger" id="btnReset">Restaurar catálogo inicial</button>
-          </div>
-          <p class="nota" style="margin-top:1rem">
-            Tus cambios se guardan en este navegador. Para que los vean todos los visitantes:
-            descarga <b>productos.js</b>, reemplaza el archivo <b>js/productos.js</b> del proyecto y súbelo a GitHub (commit + push).
-          </p>
-          <div class="aviso" id="exportAviso"></div>
-        </div>
-      </div>
-
-      <div id="tab-msg" style="display:none">
-        <div id="listaMsg"></div>
-        <button class="btn btn-sm btn-danger" id="btnBorrarMsg">Borrar todas</button>
-        <p class="nota" style="margin-top:1rem">Aquí se ven las solicitudes enviadas desde <b>este navegador</b>. Con Formspree configurado, también llegan a tu correo.</p>
-      </div>
-    </section>
-  </main>
-
-  <script src="js/config.js"></script>
-  <script src="js/productos.js"></script>
-  <script src="js/data.js"></script>
-  <script src="js/admin.js"></script>
+  <script type="module" src="/src/admin-main.jsx"></script>
 </body>
 </html>

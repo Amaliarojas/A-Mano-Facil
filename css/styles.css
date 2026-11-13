@@ -961,9 +961,10 @@ input[type="range"] {
   display: block;
   border-color: #a63d3d;
 }
-
+/* ---------- Pie de página ---------- */
 footer {
   border-top: 1px solid var(--line);
+  background-color: var(--ink);
   padding: 2.2rem 0;
   text-align: center;
   color: var(--muted);

@@ -8,7 +8,8 @@ const cors = require("cors");
 const session = require("express-session");
 
 const app = express();
-const PORT = 3000;
+app.set("trust proxy", 1);
+const PORT = process.env.PORT || 3000;
 
 // Conexión con MongoDB
 const client = new MongoClient(process.env.MONGO_URI);
@@ -29,8 +30,12 @@ async function conectarDB() {
 }
 
 // Permite que el servidor reciba información en formato JSON
+
 app.use(cors({
-    origin: "http://localhost:5500",
+    origin: [
+        "http://localhost:5173",
+        "https://saezarceandresantonio-coder.github.io"
+    ],
     credentials: true,
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"]
@@ -44,8 +49,8 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         httpOnly: true,
-        secure: false,
-        sameSite: "lax"
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax"
     }
 }));
 
@@ -68,6 +73,10 @@ function verificarAdmin(req, res, next) {
 // Iniciar sesión del administrador
 app.post("/api/admin/login", (req, res) => {
     const { usuario, clave } = req.body;
+console.log("Se recibió un intento de inicio de sesión");
+console.log("Usuario recibido:", usuario);
+console.log("¿ADMIN_USER existe?", Boolean(process.env.ADMIN_USER));
+console.log("¿ADMIN_PASSWORD existe?", Boolean(process.env.ADMIN_PASSWORD));
 
     if (
         usuario === process.env.ADMIN_USER &&
@@ -110,8 +119,9 @@ app.post("/api/admin/logout", (req, res) => {
 });
 
 
+
 // Recibir solicitudes de los clientes
-app.get("/api/solicitudes", verificarAdmin, async (req, res) => {
+app.post("/api/solicitudes", async (req, res) => {
     try {
         const nuevaSolicitud = {
             ...req.body,
@@ -135,7 +145,7 @@ app.get("/api/solicitudes", verificarAdmin, async (req, res) => {
 
 
 // Consultar las solicitudes de los clientes
-app.get("/api/solicitudes", async (req, res) => {
+app.get("/api/solicitudes", verificarAdmin, async (req, res) => {
     try {
         const lista = await solicitudes
             .find()
@@ -152,6 +162,7 @@ app.get("/api/solicitudes", async (req, res) => {
         });
     }
 });
+
 
 // Encender el servidor
 conectarDB().then(() => {
