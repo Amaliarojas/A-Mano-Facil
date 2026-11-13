@@ -7,7 +7,7 @@ function About() {
         <h2 className="sec-title">
           Quiénes somos
             </h2>
-        <div className="nosotros reveal">
+        <div className="nosotros">
           <p>{CONFIG.descripcion}</p>
         </div>
 
